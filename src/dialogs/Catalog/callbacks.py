@@ -111,7 +111,7 @@ async def to_main(callback_query: CallbackQuery,
     widget: Button,
     dialog_manager: DialogManager,):
     await dialog_manager.done()
-    await callback_query.message.answer('Добро пожаловать в HotSmok! Выберите необходимую опцию', reply_markup=kb.start_kb)
+    await callback_query.message.answer('Приветствую 👋это чат-бот HotSmok! Готов оперативно принять у Вас заказ и ответить на Ваши вопросы!', reply_markup=kb.start_kb)
 
 async def go_to_cart(
     callback_query: CallbackQuery,

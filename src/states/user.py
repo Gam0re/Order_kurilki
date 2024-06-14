@@ -6,7 +6,5 @@ class UserFSM(StatesGroup):
     write_message = State()
     write_name = State()
     write_phone = State()
-    write_email = State()
     rewrite_name = State()
     rewrite_phone = State()
-    rewrite_email = State()

@@ -31,6 +31,6 @@ async def get_carts_call(callback: types.CallbackQuery, dialog_manager: DialogMa
     except:
         pass
     if await rq.orm_get_user_carts(callback.from_user.id) == []:
-        await callback.answer('Корзина пуста', reply_markup=kb.start)
+        await callback.answer('Корзина пуста', reply_markup=kb.start_kb)
     else:
         await dialog_manager.start(Cart_levels.select_products, data={'user_id': callback.from_user.id}, mode=StartMode.RESET_STACK)

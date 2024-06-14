@@ -17,10 +17,8 @@ router = Router()
 
 @router.message(CommandStart(), ~or_f(StateFilter(user_states.UserFSM.write_name),
                                       StateFilter(user_states.UserFSM.write_phone),
-                                      StateFilter(user_states.UserFSM.write_email),
                                       StateFilter(user_states.UserFSM.rewrite_name),
                                       StateFilter(user_states.UserFSM.rewrite_phone),
-                                      StateFilter(user_states.UserFSM.rewrite_email),
                                       ))
 @router.message(F.data == 'to_main')
 @router.message(F.text == 'Главное меню')
@@ -30,7 +28,7 @@ async def start(message: types.Message, state: FSMContext, dialog_manager: Dialo
     except:
         pass
     if await rq.check_user(message.from_user.id):
-        await message.answer(f'Добро пожаловать в HotSmok! Выберите необходимую опцию', reply_markup=kb.start_kb)
+        await message.answer(f'Приветствую 👋это чат-бот HotSmok! Готов оперативно принять у Вас заказ и ответить на Ваши вопросы!', reply_markup=kb.start_kb)
     else:
         await message.answer(f'Здравствуйте! Вам есть 18 лет?', reply_markup=inkb.yes_no_kb)
 

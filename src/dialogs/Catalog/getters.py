@@ -6,11 +6,15 @@ from .states import Catalog_levels
 from aiogram_dialog import DialogManager
 
 
+order = ['SeaBear', 'Air Stick', 'EPE']
+
 
 #получение значений для 3 уровня
 async def get_level_3(dialog_manager: DialogManager, **middleware_data):
      async with async_session() as session:
-        db_main = set(await session.scalars(select(Catalog.brand)))
+        db_main = list(set(await session.scalars(select(Catalog.brand))))
+        item_ids = [db_main.index(i) for i in order]
+        db_main = [db_main[i] for i in item_ids]
         db_main_items = set(await session.scalars(select(Catalog)))
         data = {'lvl3': [(brand, await session.scalar(select(Catalog.id).where(Catalog.brand == brand))) for brand in db_main],
                 'lvl3_item': [(item.brand, item.id) for item in db_main_items]}

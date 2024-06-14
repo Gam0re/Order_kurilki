@@ -28,7 +28,11 @@ async def to_general_questions(message: types.Message):
 
 @faq_router.message(F.text == 'Наши контакты')
 async def to_general_questions(message: types.Message):
-    await message.answer("Менеджер: @hotsmok_cn_7", reply_markup=kb.faq_kb)
+    await message.answer("Менеджер: @hotsmok_cn_7; +7 981 045 55 10"
+                         "\nОфис: г. Санкт-Петербург, 18 линия В. О., д. 29, лит. И, офис 513"
+                         "\nСоц. сети:"
+                         "\n- Telegram: https://t.me/hotsmok_cn"
+                         "\n- VK: https://vk.com/hotsmok_cn", reply_markup=kb.faq_kb)
 
 @faq_router.message(F.text == 'Как сделать заказ?')
 async def how_to_order(message: types.Message):

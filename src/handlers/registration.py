@@ -24,17 +24,10 @@ async def registration_name(message: types.Message, state: FSMContext):
 
 
 @registration_router.message(StateFilter(user_states.UserFSM.write_phone), F.content_type == 'contact')
-async def registration_name(message: types.Message, state: FSMContext):
-    await state.update_data(user_phone=message.contact.phone_number)
-    await message.answer('Введите свой e-mail')
-    await state.set_state(user_states.UserFSM.write_email)
-
-
-@registration_router.message(F.text, StateFilter(user_states.UserFSM.write_email))
 async def registration_phone(message: types.Message, state: FSMContext):
-    await state.update_data(user_email=message.text)
+    await state.update_data(user_phone=message.contact.phone_number)
     user_data = await state.get_data()
-    await rq.update_name_phone_email(message.from_user.id, name=user_data.get('user_name'),
-                                     phone=user_data.get('user_phone'), email=user_data.get('user_email'))
+    await rq.update_name_phone(message.from_user.id, name=user_data.get('user_name'),
+                               phone=user_data.get('user_phone'))
     await message.answer('Регистрация прошла успешно!', reply_markup=kb.start_kb)
     await state.set_state(default_state)

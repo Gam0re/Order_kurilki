@@ -22,7 +22,7 @@ async def check_user(tg_id):
             return True
 
 
-async def update_name_phone_email(tg_id, **kwargs):
+async def update_name_phone(tg_id, **kwargs):
     async with async_session() as session:
         user_id = await session.scalar(select(User.id).where(User.tg_id == tg_id))
         user = await session.get(User, user_id)
@@ -31,8 +31,6 @@ async def update_name_phone_email(tg_id, **kwargs):
                 user.name = data
             if data_type == 'phone':
                 user.phone = data
-            if data_type == 'email':
-                user.email = data
             await session.commit()
 
 
@@ -46,12 +44,6 @@ async def get_number(tg_id):
     async with async_session() as session:
         phone = await session.scalar(select(User.phone).where(User.tg_id == tg_id))
         return phone
-
-
-async def get_email(tg_id):
-    async with async_session() as session:
-        email = await session.scalar(select(User.email).where(User.tg_id == tg_id))
-        return email
 
 
 async def get_orders(tg_id):

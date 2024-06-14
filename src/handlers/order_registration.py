@@ -26,7 +26,7 @@ async def sending_order(callback: types.CallbackQuery, widget: Button, dialog_ma
                                       await rq.orm_get_user_carts(callback.from_user.id)]
     product_strings = [f"{product[0].brand} {product[0].puffs} {product[0].flavor} кол-во: {product[1]} шт." for product in products]
     await bot.send_message(MANAGER_ID,
-                           f"Новый заказ от пользователя @{callback.from_user.username}\nна имя: {await rq.get_name(callback.from_user.id)}\nНомер телефона: {await rq.get_number(callback.from_user.id)} User id: {callback.from_user.id}\n" +
+                           f"Новый заказ от пользователя @{callback.from_user.username} на имя: {await rq.get_name(callback.from_user.id)}\nНомер телефона: {await rq.get_number(callback.from_user.id)}\n" +
                            "\n".join([string for string in product_strings]),)
     await callback.message.answer("Ваш заказ обработан и передан менеджеру, ожидайте дальнейшей связи")
     await rq.orm_update_status(callback.from_user.id, 'shop', 'in_progress')

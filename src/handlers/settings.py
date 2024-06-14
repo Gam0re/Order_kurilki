@@ -15,7 +15,6 @@ settings_router = Router()
 @settings_router.message(F.text == 'Настройки')
 @settings_router.message(F.text == 'Назад', or_f(StateFilter(user_states.UserFSM.rewrite_name),
                                                  StateFilter(user_states.UserFSM.rewrite_phone),
-                                                 StateFilter(user_states.UserFSM.rewrite_email),
                                                  )
                          )
 async def settings_setup(message: types.Message, state: FSMContext, dialog_manager: DialogManager):
@@ -41,29 +40,16 @@ async def setting_phone(message: types.Message, state: FSMContext):
     await state.set_state(user_states.UserFSM.rewrite_phone)
 
 
-@settings_router.message(F.text == 'Email')
-async def setting_email(message: types.Message, state: FSMContext):
-    email = await rq.get_email(tg_id=message.from_user.id)
-    await message.answer(f"Ваш e-mail: {email}\nВведите новое значение", reply_markup=kb.back_kb)
-    await state.set_state(user_states.UserFSM.rewrite_email)
-
-
 @settings_router.message(StateFilter(user_states.UserFSM.rewrite_name))
 async def rename(message: types.Message, state: FSMContext):
-    await rq.update_name_phone_email(message.from_user.id, name=message.text)
+    await rq.update_name_phone(message.from_user.id, name=message.text)
     await message.answer('Имя успешно изменено', reply_markup=kb.settings_kb)
     await state.set_state(default_state)
 
 
 @settings_router.message(StateFilter(user_states.UserFSM.rewrite_phone))
 async def rephone(message: types.Message, state: FSMContext):
-    await rq.update_name_phone_email(message.from_user.id, phone=message.text)
+    await rq.update_name_phone(message.from_user.id, phone=message.text)
     await message.answer('Номер успешно изменен', reply_markup=kb.settings_kb)
     await state.set_state(default_state)
 
-
-@settings_router.message(StateFilter(user_states.UserFSM.rewrite_email))
-async def remail(message: types.Message, state: FSMContext):
-    await rq.update_name_phone_email(message.from_user.id, email=message.text)
-    await message.answer('Email успешно изменен', reply_markup=kb.settings_kb)
-    await state.set_state(default_state)
