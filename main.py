@@ -7,7 +7,7 @@ from src.handlers.settings import settings_router
 from src.handlers.faq import faq_router
 from src.handlers.catalog import catalog_router
 from src.keyboards.set_menu import set_main_menu
-from src.database.models import async_main
+#from src.database.models import async_main
 from src.handlers.cart import cart_router
 from src.dialogs.Catalog.catalog_dialogs import Catalog_lvl1
 from src.dialogs.Cart.cart_dialogs import Cart
@@ -16,7 +16,7 @@ from src.handlers.order_registration import order_registration_router
 
 
 async def main():
-    await async_main()
+    #await async_main()
     dp.include_router(router)
     dp.include_router(registration_router)
     dp.include_router(account_router)
