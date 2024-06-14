@@ -6,7 +6,7 @@ from .states import Catalog_levels
 from aiogram_dialog import DialogManager
 
 
-order = ['SeaBear', 'Air Stick', 'EPE']
+order = ['SeaBear', 'Air Stick', 'EPE', 'Puff']
 
 
 #получение значений для 3 уровня
@@ -70,7 +70,6 @@ async def get_item(dialog_manager: DialogManager, **middleware_data):
                 'image': db_main.image,
                 'flavor': db_main.flavor,
                 'puffs': db_main.puffs,
-                'quant': dialog_manager.current_context().dialog_data.get('quant'),
                 'volume': db_main.volume,
                 'nicotine': db_main.nicotine,
                 'heat_element': db_main.heat_element,

@@ -3,7 +3,7 @@ from aiogram_dialog import DialogManager, StartMode
 from aiogram_dialog.widgets.kbd import Button, Select
 from .states import Catalog_levels
 from ..Cart.states import Cart_levels
-from ...database.requests import orm_add_to_cart
+from ...database.requests import orm_add_to_cart, get_products
 import src.keyboards.default.reply as kb
 """from src.database.models import async_session, Catalog, lvl2_base, lvl3_base, lvl4_base, lvl5_base"""
 from sqlalchemy import select
@@ -103,8 +103,10 @@ async def to_cart(
     widget: Button,
     dialog_manager: DialogManager,
 ):
-    await orm_add_to_cart(tg_id=callback_query.from_user.id, prod_id=int(dialog_manager.current_context().dialog_data.get('item_id')), quant=dialog_manager.dialog_data["quant"])
+    await orm_add_to_cart(tg_id=callback_query.from_user.id, prod_id=int(dialog_manager.current_context().dialog_data.get('item_id')), quant=1)
     await callback_query.answer("Товар добавлен в корзину")
+    products = await get_products(int(dialog_manager.current_context().dialog_data.get('item_id')))
+    await callback_query.message.answer(f"Вы добавили в корзину {products[0]} {products[1]} {products[2]}")
     await dialog_manager.switch_to(Catalog_levels.level_5)
 
 async def to_main(callback_query: CallbackQuery,

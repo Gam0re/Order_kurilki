@@ -52,10 +52,7 @@ Cart = Dialog(
                "Батарея: {battery} мАч\n"
                "Разъём для зарядки: {connector}\n"
                "Состав: {compound}\n"
-                "Количество {quant}"
                ),
-        Row(Button(Const("Удалить"), id="delete", on_click=delete), Button(Const("+"), id="increase", on_click=increase),
-            Button(Const("-"), id="reduce", on_click=reduce)),
         Row(Button(Const("На главную"), id="to_main", on_click=to_main), Button(Const("Каталог"), id="to_catalog", on_click=to_catalog), Back(Const("⬅ Назад"))),
         Button(Const("Оформить заказ"), id="to_payment", on_click=sending_order),
         state=Cart_levels.product_card,

@@ -95,7 +95,6 @@ Catalog_lvl1 = Dialog(
                "Разъём для зарядки: {connector}\n"
                "Состав: {compound}\n"
                ),
-        Row(Button(Const("-"), id="decrement", on_click=decrement), Button(Format('Кол-во: {quant}'), id="quant", on_click=quant), Button(Const("+"), id="increment", on_click=increment)),
         Row(Button(Const("На главную"), id="to_main", on_click=to_main), Button(Const("В корзину"), id='to_cart', on_click=to_cart),
             Back(Const("⬅ Назад"))),
         state=Catalog_levels.item,

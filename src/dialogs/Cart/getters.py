@@ -27,7 +27,6 @@ async def get_item(dialog_manager: DialogManager, **middleware_data):
                 'image': db_main.image,
                 'flavor': db_main.flavor,
                 'puffs': db_main.puffs,
-                'quant': db_quantity,
                 'volume': db_main.volume,
                 'nicotine': db_main.nicotine,
                 'heat_element': db_main.heat_element,
