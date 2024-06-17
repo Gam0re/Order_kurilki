@@ -18,7 +18,7 @@ async def to_personal_account(message: types.Message, state: FSMContext, dialog_
         await dialog_manager.done()
     except:
         pass
-    await message.answer("Вы перешли в личный кабинет\nВыберете необходимую опцию", reply_markup=kb.account_kb)
+    await message.answer("Вы перешли в личный кабинет.\nВыберете необходимую опцию", reply_markup=kb.account_kb)
 
 
 @account_router.message(F.text == 'История заказов')
