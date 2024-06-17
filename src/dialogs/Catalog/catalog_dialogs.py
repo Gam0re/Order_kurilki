@@ -94,6 +94,7 @@ Catalog_lvl1 = Dialog(
                "Батарея: {battery} мАч\n"
                "Разъём для зарядки: {connector}\n"
                "Состав: {compound}\n"
+               "\nКоличество выбранного товара уточняйте у менеджера!"
                ),
         Row(Button(Const("На главную"), id="to_main", on_click=to_main), Button(Const("В корзину"), id='to_cart', on_click=to_cart),
             Back(Const("⬅ Назад"))),

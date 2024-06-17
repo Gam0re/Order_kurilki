@@ -52,6 +52,7 @@ Cart = Dialog(
                "Батарея: {battery} мАч\n"
                "Разъём для зарядки: {connector}\n"
                "Состав: {compound}\n"
+               "\nКоличество выбранного товара уточняйте у менеджера!"
                ),
         Row(Button(Const("На главную"), id="to_main", on_click=to_main), Button(Const("Каталог"), id="to_catalog", on_click=to_catalog), Back(Const("⬅ Назад"))),
         Button(Const("Оформить заказ"), id="to_payment", on_click=sending_order),

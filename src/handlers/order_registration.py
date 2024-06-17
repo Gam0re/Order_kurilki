@@ -28,7 +28,7 @@ async def sending_order(callback: types.CallbackQuery, widget: Button, dialog_ma
     await bot.send_message(MANAGER_ID,
                            f"Новый заказ от пользователя @{callback.from_user.username} на имя: {await rq.get_name(callback.from_user.id)}\nНомер телефона: {await rq.get_number(callback.from_user.id)}\n" +
                            "\n".join([string for string in product_strings]),)
-    await callback.message.answer("Вы оформили заказ, менеджер свяжется с Вами в ближайшее время")
+    await callback.message.answer("Ваш заказ успешно оформлен! 🔥\nСпасибо, что выбрали HotSmok🙌 Наш менеджер свяжется с Вами в течение 24 часов!")
     await rq.orm_update_status(callback.from_user.id, 'shop', 'in_progress')
 
 
