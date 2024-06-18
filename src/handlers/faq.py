@@ -18,7 +18,7 @@ async def to_faq(message: types.Message, state: FSMContext, dialog_manager: Dial
         await dialog_manager.done()
     except:
         pass
-    await message.answer("Вы перешли в раздел с вопросами и ответами.\nВыберете необходимую опцию", reply_markup=kb.faq_kb)
+    await message.answer("Вы перешли в раздел с вопросами и ответами.\nВыберите необходимую опцию", reply_markup=kb.faq_kb)
 
 
 @faq_router.message(F.text == 'Общие вопросы')
