@@ -27,7 +27,7 @@ async def get_level_4(dialog_manager: DialogManager, **middleware_data):
         lvl3_name = await session.scalar(select(Catalog.brand).where(Catalog.id == int(dialog_manager.current_context().dialog_data.get('level_3'))))
         db_main = set(await session.scalars(select(Catalog.puffs).where(Catalog.brand == lvl3_name)))
         db_main_items = set(await session.scalars(select(Catalog).where(Catalog.brand == lvl3_name)))
-        data = {'lvl4': [(puffs, await session.scalar(select(Catalog.id).where(Catalog.puffs == puffs))) for puffs in db_main],
+        data = {'lvl4': [(puffs, await session.scalar(select(Catalog.id).where(Catalog.puffs == puffs, Catalog.brand == lvl3_name))) for puffs in db_main],
                 'lvl4_item': [(item.puffs, item.id) for item in db_main_items]}
         return data
 
@@ -37,7 +37,7 @@ async def get_level_5(dialog_manager: DialogManager, **middleware_data):
         lvl3_name = await session.scalar(select(Catalog.brand).where(Catalog.id == int(dialog_manager.current_context().dialog_data.get('level_3'))))
         lvl4_name = await session.scalar(select(Catalog.puffs).where(Catalog.id == int(dialog_manager.current_context().dialog_data.get('level_4'))))
         db_main = set(await session.scalars(select(Catalog.flavor).where(Catalog.brand == lvl3_name, Catalog.puffs == lvl4_name)))
-        data = {'lvl5': [(flavor, await session.scalar(select(Catalog.id).where(Catalog.flavor == flavor))) for flavor in db_main]}
+        data = {'lvl5': [(flavor, await session.scalar(select(Catalog.id).where(Catalog.flavor == flavor, Catalog.brand == lvl3_name))) for flavor in db_main]}
         return data
 
 #получение значений товаров
@@ -65,7 +65,7 @@ async def get_selected_items(dialog_manager: DialogManager, **middleware_data):
 async def get_item(dialog_manager: DialogManager, **middleware_data):
      async with async_session() as session:
         db_main = await session.scalar(select(Catalog).where(Catalog.id == int(dialog_manager.current_context().dialog_data.get('item_id'))))
-
+        print(dialog_manager.current_context().dialog_data.get('item_id'))
         data = {'brand': db_main.brand,
                 'image': db_main.image,
                 'flavor': db_main.flavor,

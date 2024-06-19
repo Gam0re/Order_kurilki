@@ -78,6 +78,7 @@ async def to_item(
     item_id: str,
 ):
     dialog_manager.dialog_data["item_id"] = item_id
+    print(item_id)
     dialog_manager.dialog_data["quant"] = 1
     await dialog_manager.switch_to(Catalog_levels.item)
 
